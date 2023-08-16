@@ -1,7 +1,8 @@
 from superagi.tools.base_tool import BaseToolkit, BaseTool
 from typing import List
 
-from tool import BankClient, UserInfo
+from bank_client import BankClient
+from user_info import UserInfo
 
 class MyToolkit(BaseToolkit):
     name: str = "Banking Assistant Toolkit"
