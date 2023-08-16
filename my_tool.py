@@ -10,7 +10,7 @@ class MyTool(BaseTool):
     args_schema: Type[BaseModel] = MyToolInput
     description: str = "Sends a Greeting Message"
 
-    def _execute(self, greetings: str = None):
+    def _execute(self, message: str = None):
         from_name = self.get_tool_config('FROM')
-        greetings_str = greetings + "\n" + from_name
+        greetings_str = message + "\n" + from_name
         return greetings_str
