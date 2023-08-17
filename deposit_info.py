@@ -16,5 +16,5 @@ class DepositInfo(BaseTool):
         base_url = self.get_tool_config("MESH_URL")
         appname = self.get_tool_config("APP_NAME")
         authorization = self.get_tool_config("AUTHORIZATION")
-        api = RemopAPI(appname, authorization, base_url)
+        api = RemopAPI(base_url, appname, authorization)
         return api.get_deposit(id)
