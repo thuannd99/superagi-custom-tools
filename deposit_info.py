@@ -15,5 +15,5 @@ class DepositInfo(BaseTool):
     def _execute(self, id: str = None):
         appname = self.get_tool_config("APP_NAME")
         authorization = self.get_tool_config("AUTHORIZATION")
-        self.api = RemopAPI(appname, authorization)
-        return self.api.get_deposit(id)
+        api = RemopAPI(appname, authorization)
+        return api.get_deposit(id)
