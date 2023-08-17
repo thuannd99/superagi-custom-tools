@@ -13,7 +13,8 @@ class DepositInfo(BaseTool):
     description: str = "Return information about a deposit (ref, status, bank client id,...)"
 
     def _execute(self, id: str = None):
+        base_url = self.get_tool_config("MESH_URL")
         appname = self.get_tool_config("APP_NAME")
         authorization = self.get_tool_config("AUTHORIZATION")
-        api = RemopAPI(appname, authorization)
+        api = RemopAPI(appname, authorization, base_url)
         return api.get_deposit(id)
