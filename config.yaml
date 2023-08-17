@@ -1,1 +1,3 @@
-USER_ID: 12
+APP_NAME: "ML"
+AUTHORIZATION: "Authorization"
+MESH_URL: "http://localhost:3011"
