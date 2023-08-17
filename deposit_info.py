@@ -12,11 +12,8 @@ class DepositInfo(BaseTool):
     args_schema: Type[BaseModel] = DepositInfoInput
     description: str = "Return information about a deposit (ref, status, bank client id,...)"
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def _execute(self, id: str = None):
         appname = self.get_tool_config("APP_NAME")
         authorization = self.get_tool_config("AUTHORIZATION")
         self.api = RemopAPI(appname, authorization)
-
-    def _execute(self, id: str = None):
         return self.api.get_deposit(id)
