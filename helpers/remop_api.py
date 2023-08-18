@@ -18,6 +18,6 @@ class RemopAPI:
         response = requests.get(url, headers=self.headers)
 
         if response.status_code == 200:
-            return response.json()  # Return the JSON data
+            return response.json()
         else:
-            response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
+            response.raise_for_status()
