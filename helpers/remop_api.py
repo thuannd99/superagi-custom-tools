@@ -1,11 +1,7 @@
 import requests
 
-from helpers.config_loader import ConfigLoader
-
 
 class RemopAPI:
-    config = ConfigLoader()
-
     def __init__(self, base_url, appname, authorization):
         self.base_url = base_url
         self.headers = {
@@ -38,6 +34,15 @@ class RemopAPI:
 
     def get_sub_payment(self, id):
         url = f"{self.base_url}/api/ml/sub_payments/{id}"
+        response = requests.get(url, headers=self.headers)
+
+        if response.status_code == 200:
+            return response.json()
+        else:
+            response.raise_for_status()
+
+    def get_user(self, id):
+        url = f"{self.base_url}/api/ml/users/{id}"
         response = requests.get(url, headers=self.headers)
 
         if response.status_code == 200:

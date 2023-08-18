@@ -1,4 +1,5 @@
 APP_NAME: "ML"
 AUTHORIZATION: "Authorization"
 MESH_URL: "http://localhost:3011"
+BACKEND_URL: "http://localhost:3100"
 REMIGPT_URL: "http://localhost:3100"
