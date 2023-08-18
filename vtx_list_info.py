@@ -1,6 +1,7 @@
 from superagi.tools.base_tool import BaseTool
 from pydantic import BaseModel, Field
 from typing import Type
+from helpers.time import convert_to_timestamp
 
 from helpers.remop_api import RemopAPI
 
@@ -19,4 +20,6 @@ class VtxListInfo(BaseTool):
         appname = self.get_tool_config("APP_NAME")
         authorization = self.get_tool_config("AUTHORIZATION")
         api = RemopAPI(base_url, appname, authorization)
-        return api.get_vtx_list(bank_client_id, from_time_timestamp, to_time_timestamp)
+        from_time = convert_to_timestamp(from_time_timestamp)
+        to_time = convert_to_timestamp(to_time_timestamp)
+        return api.get_vtx_list(bank_client_id, from_time, to_time)
