@@ -12,7 +12,6 @@ class BankUtils:
 
     def withdrawal(self, data, *extra_args):
         amount = float(extra_args[0])
-        jsonified_data = json.loads(data) 
-        transactions = jsonified_data["virtual_transactions"]
+        transactions = data["virtual_transactions"]
 
         return len(list(filter(lambda transaction: abs(float(transaction["amount"])) <= amount, transactions))) > 0
