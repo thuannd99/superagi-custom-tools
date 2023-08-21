@@ -7,6 +7,7 @@ class BankUtils:
 
     def calculate(self, data, *extra_args):
         if self.type == "withdrawal":
+            return False
             return self.withdrawal(data, *extra_args)
         return False
 
