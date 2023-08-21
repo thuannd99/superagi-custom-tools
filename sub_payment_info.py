@@ -5,7 +5,7 @@ from typing import Type
 from helpers.remop_api import RemopAPI
 
 class SubPaymentInfoInput(BaseModel):
-    id: str = Field(..., description="ID of a sub payment")
+    id: str = Field(..., description="ID or ref of a sub payment")
 
 class SubPaymentInfo(BaseTool):
     name: str = "Sub Payment Info Tool"

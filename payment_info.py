@@ -4,17 +4,17 @@ from typing import Type
 
 from helpers.remop_api import RemopAPI
 
-class DepositInfoInput(BaseModel):
-    id: str = Field(..., description="ID or ref of a deposit")
+class PaymentInfoInput(BaseModel):
+    id: str = Field(..., description="ID or ref of a payment")
 
-class DepositInfo(BaseTool):
-    name: str = "Deposit Info Tool"
-    args_schema: Type[BaseModel] = DepositInfoInput
-    description: str = "Return information about a deposit (ref, status, bank client id,...)"
+class PaymentInfo(BaseTool):
+    name: str = "Payment Info Tool"
+    args_schema: Type[BaseModel] = PaymentInfoInput
+    description: str = "Return information about a payment"
 
     def _execute(self, id: str = None):
         base_url = self.get_tool_config("MESH_URL")
         appname = self.get_tool_config("APP_NAME")
         authorization = self.get_tool_config("AUTHORIZATION")
         api = RemopAPI(base_url, appname, authorization)
-        return api.get_deposit(id)
+        return api.get_payment(id)

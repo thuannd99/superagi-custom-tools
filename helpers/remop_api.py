@@ -44,3 +44,23 @@ class RemopAPI:
         url = f"{self.base_url}/api/ml/fiat_deposits/{id}"
         response = requests.get(url, headers=self.headers)
         return self.jsonify(response)
+
+    def get_fiat_withdrawal(self, id):
+        url = f"{self.base_url}/api/ml/fiat_withdrawals/{id}"
+        response = requests.get(url, headers=self.headers)
+        return self.jsonify(response)
+
+    def get_trade(self, id):
+        url = f"{self.base_url}/api/ml/trades/{id}"
+        response = requests.get(url, headers=self.headers)
+        return self.jsonify(response)
+
+    def get_bank_client(self, id):
+        url = f"{self.base_url}/api/ml/bank_clients/{id}"
+        response = requests.get(url, headers=self.headers)
+        return self.jsonify(response)
+
+    def get_payment(self, id):
+        url = f"{self.base_url}/api/ml/payments/{id}"
+        response = requests.get(url, headers=self.headers)
+        return self.jsonify(response)
