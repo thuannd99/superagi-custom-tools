@@ -8,6 +8,7 @@ class BankUtils:
     def calculate(self, data, *extra_args):
         if self.type == "withdrawal":
             return self.withdrawal(data, *extra_args)
+        return False
 
     def withdrawal(self, data, *extra_args):
         amount = float(extra_args[0])
