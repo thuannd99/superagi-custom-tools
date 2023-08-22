@@ -15,6 +15,6 @@ class RemigptAPI:
         response = requests.get(url, params=params)
 
         if response.status_code == 200:
-            return response.text
+            return response.json().get("instruction")
         else:
             response.raise_for_status()
