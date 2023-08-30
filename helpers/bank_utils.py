@@ -28,5 +28,5 @@ class BankUtils:
             amount - 100 <= float(transaction["amount"]) <= amount,
             transactions
         ))
-        return [1242223]
+
         return list(map(lambda transaction: transaction["id"], proper_transactions))
