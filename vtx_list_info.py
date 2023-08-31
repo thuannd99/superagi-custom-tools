@@ -11,6 +11,7 @@ class VtxListInfoInput(BaseModel):
     from_time_timestamp: str = Field(..., description="from_time_timestamp of a vtx list")
     to_time_timestamp: str = Field(..., description="to_time_timestamp of a vtx list")
     amount: str = Field(..., description="amount of a payment")
+    payable_id: str = Field(..., description="payable_id of a payment")
     type: str = Field(..., description="type of a request")
 
 class VtxListInfo(BaseTool):
@@ -18,12 +19,18 @@ class VtxListInfo(BaseTool):
     args_schema: Type[BaseModel] = VtxListInfoInput
     description: str = "Return list of proper vtx ids"
 
-    def _execute(self, bank_client_id: str = None, from_time_timestamp: str = None, to_time_timestamp: str = None, amount: str = None, type: str = None):
+    def _execute(self, bank_client_id: str = None, from_time_timestamp: str = None, to_time_timestamp: str = None, amount: str = None, payable_id: str = None, type: str = None):
         base_url = self.get_tool_config("MESH_URL")
         appname = self.get_tool_config("APP_NAME")
         authorization = self.get_tool_config("AUTHORIZATION")
         api = RemopAPI(base_url, appname, authorization)
-        from_time = convert_to_timestamp(from_time_timestamp)
-        to_time = convert_to_timestamp(to_time_timestamp)
-        data = api.get_vtx_list(bank_client_id, from_time, to_time)
-        return BankUtils(type).calculate(data, amount)
+
+        if type == "deposit":
+            from_time = convert_to_timestamp(from_time_timestamp)
+            to_time = convert_to_timestamp(to_time_timestamp)
+            data = api.get_vtx_list(bank_client_id, from_time, to_time)
+        else:
+            api = RemopAPI(base_url, appname, authorization)
+            data = api.get_payment(payable_id)
+
+        return BankUtils(type).calculate(data, amount=amount, api=api)

@@ -1,7 +1,6 @@
 from superagi.tools.base_tool import BaseToolkit, BaseTool
 from typing import List
 
-from bank_helper import BankHelper
 from instruction_document import InstructionDocument
 from deposit_info import DepositInfo
 from sub_payment_info import SubPaymentInfo
@@ -19,8 +18,8 @@ class MyToolkit(BaseToolkit):
 
     def get_tools(self) -> List[BaseTool]:
         return [InstructionDocument(), DepositInfo(), SubPaymentInfo(), VtxListInfo(),
-                UserInfo(), FiatDepositInfo(), BankHelper(), FiatWithdrawalInfo(),
-                TradeInfo(), BankClientInfo(), PaymentInfo()
+                UserInfo(), TradeInfo(), BankClientInfo(), PaymentInfo(),
+                # FiatDepositInfo(), FiatWithdrawalInfo(), # These tools has not used yet
         ]
 
     def get_env_keys(self) -> List[str]:
