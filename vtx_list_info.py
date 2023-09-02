@@ -7,11 +7,11 @@ from helpers.remop_api import RemopAPI
 from helpers.bank_utils import BankUtils
 
 class VtxListInfoInput(BaseModel):
-    bank_client_id: str = Field(..., description="bank_client_id of a vtx list")
-    from_time_timestamp: str = Field(..., description="from_time_timestamp of a vtx list")
-    to_time_timestamp: str = Field(..., description="to_time_timestamp of a vtx list")
-    amount: str = Field(..., description="amount of a payment")
-    payable_id: str = Field(..., description="payable_id of a payment")
+    # bank_client_id: str = Field(..., description="bank_client_id of a vtx list")
+    # from_time_timestamp: str = Field(..., description="from_time_timestamp of a vtx list")
+    # to_time_timestamp: str = Field(..., description="to_time_timestamp of a vtx list")
+    # amount: str = Field(..., description="amount of a payment")
+    # payable_id: str = Field(..., description="payable_id of a payment")
     type: str = Field(..., description="type of a request")
 
 class VtxListInfo(BaseTool):
