@@ -28,7 +28,14 @@ class VtxListInfo(BaseTool):
         if type == "deposit":
             from_time = convert_to_timestamp(from_time_timestamp)
             to_time = convert_to_timestamp(to_time_timestamp)
-            data = api.get_vtx_list(bank_client_id, from_time, to_time)
+            
+            transactions = []
+            next_page = 1
+            while next_page is not None:
+                vtx_list = api.get_vtx_list(bank_client_id, from_time, to_time, page=next_page)
+                transactions += vtx_list["virtual_transactions"]
+                next_page = vtx_list["meta"]["next_page"]
+            data = {"virtual_transactions": transactions}
         else:
             api = RemopAPI(base_url, appname, authorization)
             data = api.get_payment(payable_id)

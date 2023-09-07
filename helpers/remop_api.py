@@ -20,12 +20,13 @@ class RemopAPI:
         response = requests.get(url, headers=self.headers)
         return self.jsonify(response)
 
-    def get_vtx_list(self, bank_client_id, from_time_timestamp, to_time_timestamp):
+    def get_vtx_list(self, bank_client_id, from_time_timestamp, to_time_timestamp, page=1):
         url = f"{self.base_url}/api/ml/virtual_transactions"
         params = {
             "bank_client_id": bank_client_id,
             "from_time_timestamp": from_time_timestamp,
             "to_time_timestamp": to_time_timestamp,
+            "page": page,
         }
         response = requests.get(url, headers=self.headers, params=params)
         return self.jsonify(response)

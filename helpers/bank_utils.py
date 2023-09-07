@@ -68,12 +68,18 @@ class BankUtils:
         from_time = convert_to_timestamp(sub_payment["start_paying_at"])
         to_time = (datetime.datetime.fromtimestamp(from_time) + datetime.timedelta(hours=24)).timestamp()
 
-        transactions = api.get_vtx_list(bank_client_id, from_time, to_time)["virtual_transactions"]
-        proper_transactions = list(filter(
-        lambda transaction:
-            amount - 100 <= abs(float(transaction["amount"])) <= amount,
-            transactions
-        ))
+        proper_transactions = []
+        next_page = 1
+        while next_page is not None:
+            vtx_list = api.get_vtx_list(bank_client_id, from_time, to_time, page=next_page)
+            transactions = vtx_list["virtual_transactions"]
+            next_page = vtx_list["meta"]["next_page"]
+
+            proper_transactions += list(filter(
+            lambda transaction:
+                amount - 100 <= abs(float(transaction["amount"])) <= amount,
+                transactions
+            ))
 
         return list(map(lambda transaction: transaction["id"], proper_transactions))
 
@@ -84,14 +90,20 @@ class BankUtils:
         from_time = convert_to_timestamp(sub_payment["start_paying_at"])
         to_time = (datetime.datetime.fromtimestamp(from_time) + datetime.timedelta(hours=48)).timestamp()
 
-        transactions = api.get_vtx_list(bank_client_id, from_time, to_time)["virtual_transactions"]
-        proper_transactions = list(filter(
-        lambda transaction:
-            transaction["status"] != "expired" and
-            transaction["finalized"] == False and
-            amount - 100 <= float(transaction["amount"]) <= amount,
-            transactions
-        ))
+        proper_transactions = []
+        next_page = 1
+        while next_page is not None:
+            vtx_list = api.get_vtx_list(bank_client_id, from_time, to_time, page=next_page)
+            transactions = vtx_list["virtual_transactions"]
+            next_page = vtx_list["meta"]["next_page"]
+
+            proper_transactions += list(filter(
+            lambda transaction:
+                transaction["status"] != "expired" and
+                transaction["finalized"] == False and
+                amount - 100 <= float(transaction["amount"]) <= amount,
+                transactions
+            ))
 
         return list(map(lambda transaction: transaction["id"], proper_transactions))
 
@@ -102,13 +114,19 @@ class BankUtils:
         from_time = convert_to_timestamp(sub_payment["start_paying_at"])
         to_time = (datetime.datetime.fromtimestamp(from_time) + datetime.timedelta(hours=24)).timestamp()
 
-        transactions = api.get_vtx_list(bank_client_id, from_time, to_time)["virtual_transactions"]
-        proper_transactions = list(filter(
-        lambda transaction:
-            transaction["status"] != "expired" and
-            transaction["finalized"] == False and
-            amount - 100 <= float(transaction["amount"]) <= amount,
-            transactions
-        ))
+        proper_transactions = []
+        next_page = 1
+        while next_page is not None:
+            vtx_list = api.get_vtx_list(bank_client_id, from_time, to_time, page=next_page)
+            transactions = vtx_list["virtual_transactions"]
+            next_page = vtx_list["meta"]["next_page"]
+
+            proper_transactions += list(filter(
+            lambda transaction:
+                transaction["status"] != "expired" and
+                transaction["finalized"] == False and
+                amount - 100 <= float(transaction["amount"]) <= amount,
+                transactions
+            ))
 
         return list(map(lambda transaction: transaction["id"], proper_transactions))
