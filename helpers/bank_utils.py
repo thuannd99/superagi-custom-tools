@@ -18,7 +18,7 @@ class BankUtils:
             return self.revert(data, api)
         if self.type == "propose":
             api = kwargs["api"]
-            return self.revert(data, api)
+            return self.propose(data, api)
         return f"Error. Does not support this type: {self.type}"
 
 
@@ -125,7 +125,8 @@ class BankUtils:
             lambda transaction:
                 transaction["status"] != "expired" and
                 transaction["finalized"] == False and
-                amount - 100 <= float(transaction["amount"]) <= amount,
+                amount - 100 <= abs(float(transaction["amount"])) <= amount and
+                float(transaction["amount"]) < 0,
                 transactions
             ))
 
