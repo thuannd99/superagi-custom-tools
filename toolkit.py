@@ -1,6 +1,7 @@
 from superagi.tools.base_tool import BaseToolkit, BaseTool
 from typing import List
 
+from chat import Chat
 from instruction_document import InstructionDocument
 from deposit_info import DepositInfo
 from sub_payment_info import SubPaymentInfo
@@ -17,7 +18,8 @@ class MyToolkit(BaseToolkit):
     description: str = "Banking Assistant Toolkit contains all tools to support banking assistant."
 
     def get_tools(self) -> List[BaseTool]:
-        return [InstructionDocument(), DepositInfo(), SubPaymentInfo(), VtxListInfo(),
+        return [InstructionDocument(), Chat(),
+                DepositInfo(), SubPaymentInfo(), VtxListInfo(),
                 UserInfo(), TradeInfo(), BankClientInfo(), PaymentInfo(),
                 # FiatDepositInfo(), FiatWithdrawalInfo(), # These tools has not used yet
         ]
