@@ -6,12 +6,12 @@ from helpers.remigpt_api import RemigptAPI
 
 class ChatInput(BaseModel):
     message: str = Field(..., description="message of a chat")
-    type: str = Field(..., description="type of a chat, should by 'dm' or 'channel'")
+    type: str = Field(..., description="type of a chat, should by 'user' or 'channel'")
 
 class Chat(BaseTool):
     name: str = "Chat Tool"
     args_schema: Type[BaseModel] = ChatInput
-    description: str = "Return status chat and confirm chat"
+    description: str = "Return status of chat tool"
 
     def _execute(self, message: str = None, type: str = None):
         base_url = self.get_tool_config("REMIGPT_URL")

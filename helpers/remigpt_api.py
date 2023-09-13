@@ -21,8 +21,8 @@ class RemigptAPI:
 
     def save_chat(self, message, type):
         url = f"{self.base_url}/superagi/save_chat"
-        params = {"message": message, "type": type}
-        response = requests.post(url, params=params)
+        body = {"message": message, "type": type}
+        response = requests.post(url, json=body)
 
         if response.status_code == 200:
             return response.json()
