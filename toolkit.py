@@ -13,7 +13,20 @@ from trade_info import TradeInfo
 from bank_client_info import BankClientInfo
 from payment_info import PaymentInfo
 
-class MyToolkit(BaseToolkit):
+
+class TestToolkit(BaseToolkit):
+    name: str = "Test"
+    description: str = "Test."
+
+    def get_tools(self) -> List[BaseTool]:
+        return [
+            FiatDepositInfo(), FiatWithdrawalInfo()
+        ]
+
+    def get_env_keys(self) -> List[str]:
+        return ["AUTHORIZATION"]
+
+class BankingToolkit(BaseToolkit):
     name: str = "Banking Assistant Toolkit"
     description: str = "Banking Assistant Toolkit contains all tools to support banking assistant."
 

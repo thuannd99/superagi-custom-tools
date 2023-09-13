@@ -13,7 +13,7 @@ class Chat(BaseTool):
     args_schema: Type[BaseModel] = ChatInput
     description: str = "Return status of chat tool"
 
-    def _execute(self, message: str = None, type: str = None):
+    def _execute(self, message: str = None, type: str = "user"):
         base_url = self.get_tool_config("REMIGPT_URL")
         api = RemigptAPI(base_url)
         response = api.save_chat(message, type)
