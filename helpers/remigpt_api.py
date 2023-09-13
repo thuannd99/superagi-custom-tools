@@ -18,3 +18,13 @@ class RemigptAPI:
             return response.json().get("instruction")
         else:
             response.raise_for_status()
+
+    def save_chat(self, message, requester_id, channel_name):
+        url = f"{self.base_url}/save_chat"
+        params = {"message": message, "requester_id": requester_id, "channel_name": channel_name}
+        response = requests.post(url, params=params)
+
+        if response.status_code == 200:
+            return response.json()
+        else:
+            response.raise_for_status()
