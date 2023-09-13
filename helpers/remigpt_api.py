@@ -10,7 +10,7 @@ class RemigptAPI:
         self.base_url = base_url
 
     def get_banking_instruction(self, question):
-        url = f"{self.base_url}/instruction"
+        url = f"{self.base_url}/superagi/instruction"
         params = {"question": question, "collection": "banking_instruction"}
         response = requests.get(url, params=params)
 
@@ -19,9 +19,9 @@ class RemigptAPI:
         else:
             response.raise_for_status()
 
-    def save_chat(self, message, requester_id, channel_name):
-        url = f"{self.base_url}/save_chat"
-        params = {"message": message, "requester_id": requester_id, "channel_name": channel_name}
+    def save_chat(self, message, type):
+        url = f"{self.base_url}/superagi/save_chat"
+        params = {"message": message, "type": type}
         response = requests.post(url, params=params)
 
         if response.status_code == 200:
