@@ -13,6 +13,8 @@ from trade_info import TradeInfo
 from bank_client_info import BankClientInfo
 from payment_info import PaymentInfo
 
+from intercom_chat_export_request import IntercomChatExportRequest
+from intercom_chat_info import IntercomChatInfo
 
 class BankingAssistantToolkit(BaseToolkit):
     name: str = "Banking Assistant Toolkit"
@@ -34,7 +36,7 @@ class BertopicToolkit(BaseToolkit):
 
     def get_tools(self) -> List[BaseTool]:
         return [
-            
+            IntercomChatExportRequest, IntercomChatInfo
         ]
 
     def get_env_keys(self) -> List[str]:
