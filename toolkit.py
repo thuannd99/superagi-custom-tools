@@ -14,19 +14,7 @@ from bank_client_info import BankClientInfo
 from payment_info import PaymentInfo
 
 
-class TestToolkit(BaseToolkit):
-    name: str = "Test"
-    description: str = "Test."
-
-    def get_tools(self) -> List[BaseTool]:
-        return [
-            FiatDepositInfo(), FiatWithdrawalInfo()
-        ]
-
-    def get_env_keys(self) -> List[str]:
-        return ["AUTHORIZATION"]
-
-class BankingToolkit(BaseToolkit):
+class BankingAssistantToolkit(BaseToolkit):
     name: str = "Banking Assistant Toolkit"
     description: str = "Banking Assistant Toolkit contains all tools to support banking assistant."
 
@@ -39,3 +27,15 @@ class BankingToolkit(BaseToolkit):
 
     def get_env_keys(self) -> List[str]:
         return ["BACKEND_URL", "MESH_URL", "APP_NAME", "AUTHORIZATION", "REMIGPT_URL"]
+
+class BertopicToolkit(BaseToolkit):
+    name: str = "Bertopic Toolkit"
+    description: str = "Bertopic Toolkit contains all tools to support running daily Bertopic."
+
+    def get_tools(self) -> List[BaseTool]:
+        return [
+            
+        ]
+
+    def get_env_keys(self) -> List[str]:
+        return ["BERTOPIC_URL", "API_KEY"]
