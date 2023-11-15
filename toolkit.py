@@ -21,7 +21,7 @@ class BankingAssistantToolkit(BaseToolkit):
     description: str = "Banking Assistant Toolkit contains all tools to support banking assistant."
 
     def get_tools(self) -> List[BaseTool]:
-        return [InstructionDocument(), Chat(),
+        return [InstructionDocument(),
                 DepositInfo(), SubPaymentInfo(), VtxListInfo(),
                 UserInfo(), TradeInfo(), BankClientInfo(), PaymentInfo(),
                 # FiatDepositInfo(), FiatWithdrawalInfo(), # These tools has not used yet
@@ -36,8 +36,20 @@ class BertopicToolkit(BaseToolkit):
 
     def get_tools(self) -> List[BaseTool]:
         return [
-            IntercomChatExportRequest, IntercomChatInfo
+            IntercomChatExportRequest(), IntercomChatInfo()
         ]
 
     def get_env_keys(self) -> List[str]:
         return ["BERTOPIC_URL", "API_KEY"]
+
+class BaseToolkit(BaseToolkit):
+    name: str = "Base Toolkit"
+    description: str = "Utility tools for Superagi."
+
+    def get_tools(self) -> List[BaseTool]:
+        return [
+            Chat(),
+        ]
+
+    def get_env_keys(self) -> List[str]:
+        return ["REMIGPT_URL"]

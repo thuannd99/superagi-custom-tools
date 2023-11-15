@@ -19,9 +19,9 @@ class RemigptAPI:
         else:
             response.raise_for_status()
 
-    def save_chat(self, message, type):
+    def save_chat(self, message, type, channel_id):
         url = f"{self.base_url}/superagi/save_chat"
-        body = {"message": message, "type": type}
+        body = {"message": message, "type": type, "channel_id": channel_id}
         response = requests.post(url, json=body)
 
         if response.status_code == 200:

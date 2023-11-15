@@ -14,8 +14,8 @@ class Chat(BaseTool):
     args_schema: Type[BaseModel] = ChatInput
     description: str = "Return status of chat tool"
 
-    def _execute(self, message: str = None, type: str = "user"):
+    def _execute(self, message: str = None, type: str = "user", channel_id: str = None):
         base_url = self.get_tool_config("REMIGPT_URL")
         api = RemigptAPI(base_url)
-        response = api.save_chat(message, type)
+        response = api.save_chat(message, type, channel_id)
         return response
